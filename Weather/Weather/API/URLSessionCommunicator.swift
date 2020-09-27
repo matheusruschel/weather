@@ -10,15 +10,18 @@ import Foundation
 
 class URLSessionWeatherCommunicator: WeatherAPICommunicator {
     
-    var baseUrl: String
+    var baseApiUrl: String
+    var baseImagesUrl: String
     let appId = "d7a12a132bf363c1c0ae7b8df6f2d42c"
     
-    init(baseUrl: String) {
-        self.baseUrl = baseUrl
+    
+    init(baseUrl: String, imageUrl: String) {
+        self.baseApiUrl = baseUrl
+        self.baseImagesUrl = imageUrl
     }
     
     func buildWeatherFetchURL(unit: String, latitude: Double, longitude: Double) -> URL? {
-        let urlString = baseUrl + "/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&units=\(unit)&appid=\(appId)"
+        let urlString = baseApiUrl + "?lat=\(latitude)&lon=\(longitude)&units=\(unit)&appid=\(appId)"
         return URL(string: urlString)
     }
     
@@ -54,7 +57,7 @@ class URLSessionWeatherCommunicator: WeatherAPICommunicator {
     
     func loadWeatherIcon(name: String, completion: @escaping WeatherFetchCompletionBlock<Data>) {
         
-        let urlString = baseUrl + "/img/wn/\(name)@2x.png"
+        let urlString = baseImagesUrl + "/\(name)@2x.png"
         
         guard let url = URL(string: urlString) else {
             completion(.error("An unexpected occurred"))

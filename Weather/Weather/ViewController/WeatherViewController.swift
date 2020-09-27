@@ -22,7 +22,8 @@ class WeatherViewController: UIViewController {
         labelTemperature.text = ""
         labelLocation.text = ""
     
-        let communicator = URLSessionWeatherCommunicator(baseUrl: "https://api.openweathermap.org")
+        let communicator = URLSessionWeatherCommunicator(baseUrl: "https://api.openweathermap.org/data/2.5/weather",
+                                                         imageUrl: "https://openweathermap.org/img/wn")
         controller = WeatherPresentationController(communicator: communicator)
         controller.delegate = self
         controller.accessLocation()

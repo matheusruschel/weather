@@ -55,13 +55,13 @@ class WeatherPresentationController: NSObject {
                     let temperatureInt = Int(temperature)
                     var tempMeasure: String
                     if isMetric {
-                        tempMeasure = "celcius"
+                        tempMeasure = "° celsius"
                     } else {
-                        tempMeasure = "farenheit"
+                        tempMeasure = "° fahrenheit"
                     }
                     
                     self?.delegate?.didFinishLoadingWeather(
-                        formattedTemperature: "\(temperatureInt) " + tempMeasure,
+                        formattedTemperature: "\(temperatureInt)" + tempMeasure,
                         locationName: name)
                     if let iconName = weather.iconName {
                         self?.loadWeatherIcon(iconName: iconName)
